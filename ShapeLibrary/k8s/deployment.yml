@@ -1,0 +1,50 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app-deployment
+  labels:
+    app: web-app
+spec:
+  replicas: 3 # Количество подов, необходимых для стабильной работы
+  selector:
+    matchLabels:
+      app: web-app
+  template:
+    metadata:
+      labels:
+        app: web-app
+    spec:
+      containers:
+        - name: web-app-container
+          image: your-docker-image:latest # Замените на реальный образ
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "128Mi"  # Запрос минимальной памяти
+              cpu: "100m"      # Запрос минимального CPU после инициализации
+            limits:
+              memory: "128Mi"
+              cpu: "500m"      # Лимит по CPU для запуска, с учётом интенсивности на старте
+          readinessProbe:      # Задаём, чтобы под начинал принимать запросы только после инициализации
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10 # Ожидаем 5-10 секунд для инициализации приложения
+            periodSeconds: 5
+          livenessProbe:       # Следим за состоянием пода, чтобы перезапускать в случае сбоев
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 30
+            periodSeconds: 10
+      affinity:                # Настраиваем affinity для распределения подов по разным нодам
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - web-app
+              topologyKey: "kubernetes.io/hostname" # Распределение по разным хостам (нодам)

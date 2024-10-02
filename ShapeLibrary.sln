@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapeLibrary", "ShapeLibrar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapeTests", "ShapeTests\ShapeTests.csproj", "{A2977CC6-DDF2-49ED-A649-F0F36775031A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5142FE05-E703-452C-8CC6-C4EF22382C42}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E28F6230-75CA-438A-B81C-1120A823693F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,9 @@ Global
 		{A2977CC6-DDF2-49ED-A649-F0F36775031A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2977CC6-DDF2-49ED-A649-F0F36775031A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2977CC6-DDF2-49ED-A649-F0F36775031A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{419FA701-C47D-4471-B16E-CE02D4869A98} = {5142FE05-E703-452C-8CC6-C4EF22382C42}
+		{A2977CC6-DDF2-49ED-A649-F0F36775031A} = {E28F6230-75CA-438A-B81C-1120A823693F}
 	EndGlobalSection
 EndGlobal
